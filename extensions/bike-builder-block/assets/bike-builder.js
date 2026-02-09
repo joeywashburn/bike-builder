@@ -379,25 +379,86 @@
       const result = await response.json();
       console.log('Added to cart:', result);
 
-      // Show success message
+      // Show success notification
       const itemsList = items.map(i => {
         const variantInfo = i.variantTitle !== 'Default Title' ? ` (${i.variantTitle})` : '';
-        return `✓ ${i.title}${variantInfo}`;
-      }).join('\n');
+        return `<div class="bb-success-item">✓ ${i.title}${variantInfo}</div>`;
+      }).join('');
 
-      alert(`🎉 Successfully added ${items.length} parts to your cart!\n\n${itemsList}${buildFeeMessage}\n\nClick OK to view your cart.`);
-
-      // Redirect to cart page
-      window.location.href = '/cart';
+      showSuccessModal(items.length, itemsList, buildFeeMessage);
 
     } catch (error) {
       console.error('Error adding to cart:', error);
-      alert('Sorry, there was an error adding items to cart. Please try again.');
+      showErrorToast('Sorry, there was an error adding items to cart. Please try again.');
 
       // Re-enable button
       btn.disabled = false;
       btn.classList.remove('loading');
       btn.textContent = originalText;
     }
+  }
+
+  function showSuccessModal(itemCount, itemsList, buildFeeMessage) {
+    const modal = document.createElement('div');
+    modal.className = 'bb-modal-overlay';
+    modal.innerHTML = `
+      <div class="bb-modal">
+        <div class="bb-modal-header">
+          <div class="bb-modal-icon">🎉</div>
+          <h3>Added to Cart!</h3>
+        </div>
+        <div class="bb-modal-body">
+          <p class="bb-modal-message">Successfully added ${itemCount} part${itemCount > 1 ? 's' : ''} to your cart</p>
+          <div class="bb-modal-items">
+            ${itemsList}
+          </div>
+          ${buildFeeMessage ? `<div class="bb-modal-fee">${buildFeeMessage.replace(/\n/g, '').trim()}</div>` : ''}
+        </div>
+        <div class="bb-modal-actions">
+          <button class="bb-modal-btn bb-modal-btn-secondary" onclick="this.closest('.bb-modal-overlay').remove()">
+            Continue Shopping
+          </button>
+          <button class="bb-modal-btn bb-modal-btn-primary" onclick="window.location.href='/cart'">
+            View Cart →
+          </button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    // Close on overlay click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.remove();
+      }
+    });
+
+    // Close on Escape key
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        modal.remove();
+        document.removeEventListener('keydown', handleEscape);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+  }
+
+  function showErrorToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'bb-toast bb-toast-error';
+    toast.innerHTML = `
+      <div class="bb-toast-icon">⚠️</div>
+      <div class="bb-toast-message">${message}</div>
+    `;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.classList.add('bb-toast-show');
+    }, 10);
+
+    setTimeout(() => {
+      toast.classList.remove('bb-toast-show');
+      setTimeout(() => toast.remove(), 300);
+    }, 4000);
   }
 })();
