@@ -2,14 +2,14 @@
 # Learn more: https://shopify.dev/docs/apps/tools/cli/configuration
 
 # App Identity
-client_id = "60e55dd15c2ab20c2e339e578a516832"
+client_id = "f44ee8bd075f1fdfc54705da042089ae"
 name = "bike-builder"
 
 # Application URL
 # IMPORTANT: Update this when deploying to production (Railway URL)
 # Development: Automatically set by `shopify app dev`
 # Production: Set to your Railway deployment URL (e.g., https://bike-builder-production.up.railway.app)
-application_url = "https://example.com"
+application_url = "https://bike-builder-production.up.railway.app"
 
 # App Settings
 embedded = true
@@ -52,7 +52,7 @@ scopes = "read_products"
 # Development: Automatically set by `shopify app dev`
 # Production: Update to Railway URL (e.g., https://bike-builder-production.up.railway.app/api/auth)
 redirect_urls = [
-  "https://example.com/api/auth"
+  "https://bike-builder-production.up.railway.app/api/auth"
 ]
 
 # App Proxy Configuration
