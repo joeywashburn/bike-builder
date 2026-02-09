@@ -1,0 +1,263 @@
+/* Bike Builder Styles */
+
+.bike-builder {
+  --color-primary: #4F46E5;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --border-radius: 8px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  min-height: 100vh;
+  background: #f9fafb;
+  padding: var(--space-lg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.bb-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  padding: var(--space-lg);
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.bb-header h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.bb-tagline {
+  font-size: 1.1rem;
+  color: #6b7280;
+  margin: var(--space-sm) 0 0 0;
+}
+
+.bb-container {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: var(--space-lg);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .bb-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Parts Selector */
+.bb-parts-selector {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.bb-parts-selector h2 {
+  margin-top: 0;
+  color: #111827;
+  font-size: 1.8rem;
+}
+
+.bb-category {
+  margin-bottom: var(--space-xl);
+}
+
+.bb-category h3 {
+  color: var(--color-primary);
+  font-size: 1.4rem;
+  margin-bottom: var(--space-md);
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: var(--space-sm);
+}
+
+.bb-parts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-md);
+}
+
+@media (max-width: 640px) {
+  .bb-parts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}
+
+/* Part Card */
+.bb-part-card {
+  background: #f9fafb;
+  border: 2px solid transparent;
+  border-radius: var(--border-radius);
+  padding: var(--space-md);
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  text-align: center;
+}
+
+.bb-part-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary);
+}
+
+.bb-part-card:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.bb-part-card.selected {
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 10%, white);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 20%, white);
+}
+
+.bb-part-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: calc(var(--border-radius) / 2);
+  margin-bottom: var(--space-sm);
+  background: white;
+}
+
+.bb-part-info {
+  text-align: center;
+}
+
+.bb-part-name {
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: var(--space-xs);
+  font-size: 0.95rem;
+}
+
+.bb-part-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* Build List */
+.bb-build-list {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: var(--space-lg);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+@media (max-width: 1200px) {
+  .bb-build-list {
+    position: static;
+    max-height: none;
+  }
+}
+
+.bb-build-list h2 {
+  margin-top: 0;
+  color: #111827;
+  font-size: 1.8rem;
+}
+
+.bb-list-paper {
+  background: linear-gradient(to bottom, white 0%, #f9fafb 100%);
+  border: 2px solid #e5e7eb;
+  border-radius: var(--border-radius);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  min-height: 200px;
+}
+
+.bb-list-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-sm);
+  font-weight: bold;
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid #111827;
+  margin-bottom: var(--space-md);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.bb-list-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.bb-list-empty {
+  text-align: center;
+  color: #6b7280;
+  padding: var(--space-xl) var(--space-md);
+  font-style: italic;
+}
+
+.bb-item-name {
+  font-weight: 500;
+  color: #111827;
+}
+
+.bb-item-price {
+  text-align: right;
+  font-weight: 600;
+  color: #111827;
+}
+
+.bb-list-total {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 3px double #111827;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+/* Button */
+.bb-btn-primary {
+  width: 100%;
+  padding: 14px 24px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.bb-btn-primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-primary) 90%, black);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--color-primary) 40%, transparent);
+}
+
+.bb-btn-primary:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

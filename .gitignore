@@ -1,0 +1,72 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment variables (NEVER commit!)
+.env
+.env.*
+!.env.example
+
+# Database files
+/prisma/dev.sqlite
+/prisma/dev.sqlite-journal
+/prisma/*.db
+/prisma/*.db-journal
+database.sqlite
+*.sqlite
+*.db
+
+# Build outputs
+/.cache
+/build
+/app/build
+/public/build/
+/public/_dev
+/app/public/build
+/extensions/*/dist
+dist/
+.output/
+
+# Shopify CLI files
+.shopify/*
+.shopify.lock
+
+# React Router
+.react-router/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# Testing
+coverage/
+
+# Temporary
+tmp/
+temp/
+*.tmp
+
+# Deployment
+.railway/
+.vercel/

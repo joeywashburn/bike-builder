@@ -1,0 +1,52 @@
+{% comment %}
+  Bike Builder Block
+  Displays the bike builder interface on the storefront
+{% endcomment %}
+
+<div
+  id="bike-builder-app"
+  class="bike-builder-container"
+  data-shop="{{ shop.permanent_domain }}"
+  data-api-url="{{ block.settings.api_url | default: '/apps/bike-builder/api' }}"
+>
+  <div class="bike-builder-loading">
+    <p>Loading bike builder...</p>
+  </div>
+</div>
+
+{%- comment -%} Load BikeBuilder styles {%- endcomment -%}
+{{ 'bike-builder.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%} Load BikeBuilder JavaScript {%- endcomment -%}
+<script src="{{ 'bike-builder.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Bike Builder",
+  "target": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "⚠️ **Performance Recommendation:** Use this block on a dedicated page (e.g., /pages/build-your-bike) instead of your homepage or every page. The bike builder loads all products and could slow down high-traffic pages."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Build Your Dream Bike"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Select your parts and create the perfect ride"
+    },
+    {
+      "type": "url",
+      "id": "api_url",
+      "label": "API URL (Advanced)",
+      "info": "Leave blank to use default"
+    }
+  ]
+}
+{% endschema %}

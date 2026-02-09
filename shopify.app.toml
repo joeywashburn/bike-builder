@@ -1,0 +1,81 @@
+# Bike Builder App Configuration
+# Learn more: https://shopify.dev/docs/apps/tools/cli/configuration
+
+# App Identity
+client_id = "60e55dd15c2ab20c2e339e578a516832"
+name = "bike-builder"
+
+# Application URL
+# IMPORTANT: Update this when deploying to production (Railway URL)
+# Development: Automatically set by `shopify app dev`
+# Production: Set to your Railway deployment URL (e.g., https://bike-builder-production.up.railway.app)
+application_url = "https://example.com"
+
+# App Settings
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+include_config_on_deploy = true
+
+# Webhooks Configuration
+[webhooks]
+api_version = "2026-04"
+
+  # App lifecycle webhooks
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "/webhooks/app/uninstalled"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/scopes_update" ]
+  uri = "/webhooks/app/scopes_update"
+
+# GDPR Mandatory Webhooks (REQUIRED FOR APP STORE)
+# Note: These MUST be configured in Partners Dashboard, NOT in this file
+# Routes exist at:
+# - /webhooks/customers/redact (Delete customer data on request)
+# - /webhooks/shop/redact (Delete all shop data when app is deleted)
+# - /webhooks/customers/data_request (Export customer data on request)
+#
+# Configure these in Partners Dashboard → App setup → Data protection
+
+# Access Scopes
+[access_scopes]
+# Minimal scopes for bike builder functionality
+# read_products: Read product data, tags, variants, pricing
+scopes = "read_products"
+
+# OAuth Configuration
+[auth]
+# IMPORTANT: Update redirect URLs when deploying to production
+# Development: Automatically set by `shopify app dev`
+# Production: Update to Railway URL (e.g., https://bike-builder-production.up.railway.app/api/auth)
+redirect_urls = [
+  "https://example.com/api/auth"
+]
+
+# App Proxy Configuration
+# Allows storefront to access bike builder API at /apps/bike-builder/api/*
+[app_proxy]
+url = "/apps/bike-builder"        # Path on your app server
+subpath = "bike-builder"           # Creates storefront URL: /apps/bike-builder/*
+prefix = "apps"                    # URL prefix (standard for Shopify apps)
+
+# How it works:
+# Storefront request: https://yourstore.com/apps/bike-builder/api/parts
+# Proxied to: https://your-app.com/apps/bike-builder/api/parts (with shop parameter added)
+# Handled by: app/routes/apps.bike-builder.api.parts.jsx
+
+# IMPORTANT: App proxy changes only apply to NEW installs
+# If you change prefix or subpath, existing installs won't update
+# Merchants must reinstall the app to see app proxy changes
+
+# Production Deployment Checklist:
+# ☐ Update application_url to Railway deployment URL
+# ☐ Update auth.redirect_urls to Railway URL + /api/auth
+# ☐ Configure GDPR webhooks in Partners Dashboard
+# ☐ Verify access_scopes are minimal (currently: read_products)
+# ☐ Test app proxy works in production
+# ☐ Set environment variables in Railway (SHOPIFY_API_KEY, SHOPIFY_API_SECRET)
+# ☐ Update Partners Dashboard app URLs to production URLs
