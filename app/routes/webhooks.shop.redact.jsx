@@ -9,7 +9,10 @@ export const action = async ({ request }) => {
   const { shop, payload } = await authenticate.webhook(request);
 
   console.log(`[GDPR] Shop redact request from shop: ${shop}`);
-  console.log(`Shop ID: ${payload.shop_id}`);
+
+  // Safely access shop ID (handle both test and real webhooks)
+  const shopId = payload?.shop_id || payload?.shop_domain || shop;
+  console.log(`Shop ID: ${shopId}`);
 
   // TODO: Delete ALL shop data:
   // - Merchant settings (collections/tags configuration)
